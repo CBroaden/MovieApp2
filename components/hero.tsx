@@ -1,43 +1,23 @@
-import NextLogo from "./next-logo";
-import SupabaseLogo from "./supabase-logo";
+'use client'
+import { useContext } from "react";
+import Image from 'next/image';
+import { useMoviesContext } from "@/context/MoviesContext";
 
 export default function Header() {
+  const { movies } = useMoviesContext();
+
+  if (!movies || movies.length === 0) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <div className="flex flex-col gap-16 items-center">
-      <div className="flex gap-8 justify-center items-center">
-        <a
-          href="https://supabase.com/?utm_source=create-next-app&utm_medium=template&utm_term=nextjs"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <SupabaseLogo />
-        </a>
-        <span className="border-l rotate-45 h-6" />
-        <a href="https://nextjs.org/" target="_blank" rel="noreferrer">
-          <NextLogo />
-        </a>
+    <div className="flex flex-col gap-8 items-center">
+      <div className="flex flex-col gap-2 justify-center items-center">
+        <h1 className="font-bold text-2xl">MovieX</h1>
+        <h2 className="font-semibold text-lg">A Movie Based Social Media</h2>
+        <h3 className="text-sm">Powered by Next.js and Supabase</h3>
+        <p>{movies[0].overview}</p>
       </div>
-      <h1 className="sr-only">Supabase and Next.js Starter Template</h1>
-      <p className="text-3xl lg:text-4xl !leading-tight mx-auto max-w-xl text-center">
-        The fastest way to build apps with{" "}
-        <a
-          href="https://supabase.com/?utm_source=create-next-app&utm_medium=template&utm_term=nextjs"
-          target="_blank"
-          className="font-bold hover:underline"
-          rel="noreferrer"
-        >
-          Supabase
-        </a>{" "}
-        and{" "}
-        <a
-          href="https://nextjs.org/"
-          target="_blank"
-          className="font-bold hover:underline"
-          rel="noreferrer"
-        >
-          Next.js
-        </a>
-      </p>
       <div className="w-full p-[1px] bg-gradient-to-r from-transparent via-foreground/10 to-transparent my-8" />
     </div>
   );

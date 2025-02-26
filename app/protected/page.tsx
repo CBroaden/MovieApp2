@@ -2,21 +2,29 @@ import FetchDataSteps from "@/components/tutorial/fetch-data-steps";
 import { createClient } from "@/utils/supabase/server";
 import { InfoIcon } from "lucide-react";
 import { redirect } from "next/navigation";
+import PostForm from "@/components/postform";
 
 export default async function ProtectedPage() {
   const supabase = await createClient();
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+const {
+  data: { user },
+} = await supabase.auth.getUser();
 
-  if (!user) {
-    return redirect("/sign-in");
-  }
+if (!user) {
+  return redirect("/sign-in");
+}
+
+const {data : username} = await supabase.from('users').select('username').eq('id', user.id).single();
+
+console.log(username);
+console.log(user.id);
 
   return (
     <div className="flex-1 w-full flex flex-col gap-12">
       <div className="w-full">
+        <h1 className="font-bold text-3xl">Welcome {username?.username}, To MovieX</h1>
+        <PostForm username={username?.username}/>
         <div className="bg-accent text-sm p-3 px-5 rounded-md text-foreground flex gap-3 items-center">
           <InfoIcon size="16" strokeWidth={2} />
           This is a protected page that you can only see as an authenticated

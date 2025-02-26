@@ -6,6 +6,7 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 export const signUpAction = async (formData: FormData) => {
+  const username = formData.get("username")?.toString();
   const email = formData.get("email")?.toString();
   const password = formData.get("password")?.toString();
   const supabase = await createClient();
@@ -24,6 +25,9 @@ export const signUpAction = async (formData: FormData) => {
     password,
     options: {
       emailRedirectTo: `${origin}/auth/callback`,
+      data: {
+        username: username,
+      },
     },
   });
 
@@ -132,3 +136,31 @@ export const signOutAction = async () => {
   await supabase.auth.signOut();
   return redirect("/sign-in");
 };
+
+export const createPostAction = async (formData: FormData) => {
+
+  const title = formData.get("movie") as string;
+  const content = formData.get("content") as string;
+  const supabase = await createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return encodedRedirect("error", "/protected", "You must be signed in");
+  }
+
+  const { error } = await supabase.from("posts").insert({
+    movie: title,
+    text: content,
+    user_id: user.id,
+    likes: 0,
+  });
+
+  if (error) {
+    return encodedRedirect("error", "/protected", error.message);
+  }
+
+  return encodedRedirect("success", "/protected", "Post created");
+}
