@@ -10,8 +10,6 @@ import "./globals.css";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/app-sidebar"
 import { MoviesProvider } from "@/context/MoviesContext";
-import { Suspense } from "react";
-import Loading from "@/app/loading";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -59,11 +57,9 @@ export default function RootLayout({
                   </div>
                 </nav>
                 <div className="flex flex-col gap-20 max-w-5xl w-full p-5">
-                    <Suspense fallback={<Loading />}>
-                      <MoviesProvider>
-                        {children}
-                      </MoviesProvider>
-                    </Suspense>
+                    <MoviesProvider>
+                      {children}
+                    </MoviesProvider>
                 </div>
 
                 

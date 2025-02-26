@@ -3,6 +3,7 @@ import { createClient } from "@/utils/supabase/server";
 import { InfoIcon } from "lucide-react";
 import { redirect } from "next/navigation";
 import PostForm from "@/components/postform";
+import SearchBar from "@/components/searchbar";
 
 export default async function ProtectedPage() {
   const supabase = await createClient();
@@ -22,6 +23,9 @@ console.log(user.id);
 
   return (
     <div className="flex-1 w-full flex flex-col gap-12">
+
+      <SearchBar />
+
       <div className="w-full">
         <h1 className="font-bold text-3xl">Welcome {username?.username}, To MovieX</h1>
         <PostForm username={username?.username}/>

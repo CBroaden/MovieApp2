@@ -162,5 +162,5 @@ export const createPostAction = async (formData: FormData) => {
     return encodedRedirect("error", "/protected", error.message);
   }
 
-  return encodedRedirect("success", "/protected", "Post created");
+  return encodedRedirect("success", "/feed", "Post created");
 }
