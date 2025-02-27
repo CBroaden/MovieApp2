@@ -56,7 +56,7 @@ export default function RootLayout({
                     {!hasEnvVars ? <EnvVarWarning /> : <HeaderAuth />}
                   </div>
                 </nav>
-                <div className="flex flex-col gap-20 max-w-5xl w-full p-5">
+                <div className="flex flex-col gap-20 max-w-7xl w-full p-5">
                     <MoviesProvider>
                       {children}
                     </MoviesProvider>

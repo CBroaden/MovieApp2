@@ -25,7 +25,7 @@ export default async function SearchResults( {
 
     const apiKey = process.env.NEXT_PUBLIC_TMDB_API_KEY;    
     const movie = (await searchParams).search;
-    const results = await fetch(`https://api.themoviedb.org/3/search/movie?query=${movie}`, options);
+    const results = await fetch(`https://api.themoviedb.org/3/search/movie?include_adult=false&language=en-US&query=${movie}`, options);
     const data = await results.json();
     const movies = data.results;
 
@@ -36,17 +36,17 @@ export default async function SearchResults( {
                 
                 <div>
                     <h1 className="page-title text-center font-semibold text-lg">{movie}</h1>
-                    <div className=" mx-auto grid grid-cols-1 md:grid-cols-2">
+                    <div className=" mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 justify-items-center mt-10">
                     {movies.map((movie: any) => (
-                        <div key={movie.id} className="p-5 my-4 bg-2">
+                        <div key={movie.id} className="py-6 bg-zinc-200 rounded-lg outline-dashed outline-2 outline-black shadow-black flex flex-col gap-2 w-64">
                             {movie.poster_path ? (
                                 <Image 
                                 priority
                                 className="shadow-lg shadow-black mx-auto rounded-3xl"
                                 src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} 
                                 alt={movie.title} 
-                                width={250} 
-                                height={375} 
+                                width={150} 
+                                height={275} 
                                 />
                             ) : (
                                 <div className="text-center flex justify-center items-center min-h-[250px] w-full">
@@ -55,10 +55,10 @@ export default async function SearchResults( {
                             )}
                             
                             <Link href={`/moviedetails/${movie.id}`} className="hover:text-blue-600">
-                                <h1 className="text-xl my-2 italic font-bold underline text-center">{movie.title}</h1>
+                                <h1 className="text-lg px-2 my-2 italic font-semibold text-center">{movie.title}</h1>
                             </Link>
                             
-                            <p className="">
+                            <p className="line-clamp-5 overflow-ellipsis px-4">
                                 {movie.overview}
                             </p>
 
