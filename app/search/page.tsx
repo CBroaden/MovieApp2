@@ -25,11 +25,9 @@ export default async function SearchResults( {
 
     const apiKey = process.env.NEXT_PUBLIC_TMDB_API_KEY;    
     const movie = searchParams?.search;
-    console.log("Search Results =", searchParams.search);
     const results = await fetch(`https://api.themoviedb.org/3/search/movie?query=${movie}`, options);
     const data = await results.json();
     const movies = data.results;
-    console.log(movies);
 
     return (
         <main className=" pt-6 flex flex-col min-h-screen items-center">
