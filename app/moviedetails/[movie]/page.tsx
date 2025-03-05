@@ -1,7 +1,8 @@
 import Image from "next/image";
 import { Star } from "lucide-react";
 
-export default async function MovieDetailsPage({params }: {params: { movie: string }}) {
+
+export default async function MovieDetailsPage({params }: {params: Promise<{ movie: string }>}) {
   const options = {
     method: "GET",
     headers: {
@@ -9,8 +10,8 @@ export default async function MovieDetailsPage({params }: {params: { movie: stri
       Authorization: `${process.env.NEXT_PUBLIC_TMDB_API_KEY}`,
     },
   };
-
-  const data = await fetch(`https://api.themoviedb.org/3/movie/${params.movie}`, options);
+  const param = await params;
+  const data = await fetch(`https://api.themoviedb.org/3/movie/${param.movie}`, options);
   const movie = await data.json();
   return (
     <div className="flex flex-col items-center gap-4 mx-auto max-w-3xl">
