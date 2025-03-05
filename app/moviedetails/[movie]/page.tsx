@@ -41,7 +41,7 @@ export default async function MovieDetailsPage({
               <h2 className="font-semibold">Average Rating</h2>
               <div className="flex gap-1 items-center">
                 <Star size={14} fill="gold"  />
-                <p className="">{movie.vote_average.toFixed(1)}</p>
+                <p className="tracking-widest">{movie.vote_average.toFixed(1)}</p>
               </div>
               
             </div>
