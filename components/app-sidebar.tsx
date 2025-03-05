@@ -1,4 +1,4 @@
-import { Clapperboard, Home, SquarePen, Search, Settings } from "lucide-react"
+import { Clapperboard, Home, SquarePen, Settings } from "lucide-react"
  
 import {
   Sidebar,
@@ -28,16 +28,6 @@ const items = [
     url: "/movies",
     icon: Clapperboard,
   },
-  {
-    title: "Search",
-    url: "#",
-    icon: Search,
-  },
-  {
-    title: "Settings",
-    url: "#",
-    icon: Settings,
-  },
 ]
  
 export function AppSidebar() {
@@ -50,6 +40,7 @@ export function AppSidebar() {
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
+                  
                   <SidebarMenuButton asChild>
                     <a href={item.url}>
                       <item.icon />

@@ -7,6 +7,9 @@ interface Movie {
   overview: string;
   title: string;
   poster_path: string;
+  backdrop_path: string;
+  release_date: string;
+  vote_average: number;
 }
 
 interface MoviesContextProps {

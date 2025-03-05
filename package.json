@@ -1,5 +1,9 @@
 {
   "private": true,
+  "name": "cb-moviex",
+  "version": "0.8.0",
+  "description": "A Movie Based Social Media",
+  
   "scripts": {
     "dev": "next dev",
     "build": "next build",

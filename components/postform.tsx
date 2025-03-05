@@ -44,7 +44,8 @@ export default function PostForm({username}: {username: string}) {
 
   return (
     <Form {...form}>
-      <form action={createPostAction} className="space-y-2 lg:w-1/2">
+      <form action={createPostAction} className="space-y-2 my-4 lg:w-1/2  p-4 rounded-lg shadow shadow-zinc-700">
+        <h1 className="text-center font-semibold">Create a Post</h1>
         <FormField
           control={form.control}
           name="movie"
@@ -74,7 +75,7 @@ export default function PostForm({username}: {username: string}) {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button className="w-full " type="submit">Submit</Button>
       </form>
     </Form>
   )

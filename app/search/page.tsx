@@ -1,3 +1,4 @@
+import { ArrowBigRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -35,10 +36,10 @@ export default async function SearchResults( {
             {movies && movies.length > 0 ? (
                 
                 <div>
-                    <h1 className="page-title text-center font-semibold text-lg">{movie}</h1>
-                    <div className=" mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 justify-items-center mt-10">
+                    <h1 className="page-title text-center font-semibold capitalize text-lg">{movie}</h1>
+                    <div className=" mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 justify-items-center mt-10">
                     {movies.map((movie: any) => (
-                        <div key={movie.id} className="py-6 bg-zinc-200 rounded-lg outline-dashed outline-2 outline-black shadow-black flex flex-col gap-2 w-64">
+                        <div key={movie.id} className="py-6 bg-zinc-100 shadow rounded-lg outline-dashed outline-2 outline-black shadow-black flex flex-col gap-2 w-64">
                             {movie.poster_path ? (
                                 <Image 
                                 priority
@@ -54,14 +55,25 @@ export default async function SearchResults( {
                                 </div>
                             )}
                             
-                            <Link href={`/moviedetails/${movie.id}`} className="hover:text-blue-600">
+                            <Link href={`/moviedetails/${movie.id}`} className="hover:text-blue-600 hover:underline">
                                 <h1 className="text-lg px-2 my-2 italic font-semibold text-center">{movie.title}</h1>
                             </Link>
+                            { movie.overview ? (
+                                <p className="line-clamp-5 overflow-ellipsis px-4">
+                                    {movie.overview}
+                                </p>
+                            ) : (
+                                <h1 className="text-center">No Overview Available</h1>
+                            )
+                            }
                             
-                            <p className="line-clamp-5 overflow-ellipsis px-4">
-                                {movie.overview}
-                            </p>
-
+                            <div className="flex justify-center mt-auto">
+                                <Link href={`/moviedetails/${movie.id}`} className="flex hover:underline items-center p-2">
+                                    <h1>Find Out More</h1>
+                                    <ArrowBigRight fill="black" />
+                                </Link>
+                                
+                            </div>
                         </div>
                         ))}
                     </div>

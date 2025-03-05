@@ -1,9 +1,16 @@
+import { Input } from "@/components/ui/input"
+import { Search } from "lucide-react"
+
+
 export default function SearchBar() {
 
     return (
-        <div className=" w-full h-12 bg-opacity-20 p-1 z-10">
-            <form className="w-full" action='/search'>
-                <input type="text" placeholder="Search Movies..." name="search" className="border mx-auto font-bold w-full border-black py-1 px-2 rounded-full text-md"></input>
+        <div className=" h-12 p-1">
+            <form className="flex md:max-w-md w-full" action='/search'>
+                <Input type="text" placeholder="Search Movies..." name="search" className=" rounded-r-none shadow shadow-zinc-700"></Input>
+                <button type="submit" className="shadow shadow-zinc-700  border rounded-l-none rounded-lg bg-accent text-foreground p-2">
+                    <Search size={16} className="mx-auto" />
+                </button>
             </form>
         </div>
     )
