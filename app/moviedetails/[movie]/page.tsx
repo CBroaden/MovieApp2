@@ -1,11 +1,7 @@
 import Image from "next/image";
 import { Star } from "lucide-react";
 
-export default async function MovieDetailsPage({
-  params,
-}: {
-  params: { movie: string };
-}) {
+export default async function MovieDetailsPage({params }: {params: { movie: string }}) {
   const options = {
     method: "GET",
     headers: {
@@ -14,10 +10,7 @@ export default async function MovieDetailsPage({
     },
   };
 
-  const data = await fetch(
-    `https://api.themoviedb.org/3/movie/${params.movie}`,
-    options
-  );
+  const data = await fetch(`https://api.themoviedb.org/3/movie/${await params.movie}`, options);
   const movie = await data.json();
   return (
     <div className="flex flex-col items-center gap-4 mx-auto max-w-3xl">
