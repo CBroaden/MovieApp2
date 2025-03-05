@@ -15,7 +15,7 @@ export default async function MovieDetailsPage({
   };
 
   const data = await fetch(
-    `https://api.themoviedb.org/3/movie/${(await params).movie}`,
+    `https://api.themoviedb.org/3/movie/${params.movie}`,
     options
   );
   const movie = await data.json();
