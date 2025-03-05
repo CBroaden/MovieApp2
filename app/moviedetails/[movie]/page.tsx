@@ -11,7 +11,7 @@ export default async function MovieDetailsPage({params }: {params: { movie: stri
   };
 
   const data = await fetch(`https://api.themoviedb.org/3/movie/${await params.movie}`, options);
-  const movie = await data.json();
+  const {movie} = await data.json();
   return (
     <div className="flex flex-col items-center gap-4 mx-auto max-w-3xl">
       <div className="flex  gap-4 flex-row border-b-2 px-6 pb-6">
