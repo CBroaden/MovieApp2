@@ -11,7 +11,7 @@ export default async function SearchResults( {
     params,
     searchParams,
     }: {
-    params: { slug: string }
+    params: Promise<{ slug: string }>
     searchParams: Promise<{ [key: string]: string | string[] | undefined }>
     }) {
 
