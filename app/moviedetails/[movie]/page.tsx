@@ -9,8 +9,8 @@ export default async function MovieDetailsPage({params }: {params: { movie: stri
       Authorization: `${process.env.NEXT_PUBLIC_TMDB_API_KEY}`,
     },
   };
-
-  const data = await fetch(`https://api.themoviedb.org/3/movie/${await params.movie}`, options);
+  const param = await params.movie;
+  const data = await fetch(`https://api.themoviedb.org/3/movie/${param}`, options);
   const {movie} = await data.json();
   return (
     <div className="flex flex-col items-center gap-4 mx-auto max-w-3xl">
