@@ -8,6 +8,15 @@ import Link from "next/link";
 
 
 export default async function FeedPage() {
+    type Post = {
+        id: string;
+        movie: string;
+        text: string;
+        created_at: string;
+        user_id: string;
+        users: { username: string } | null; // Single object or null
+      };
+
     const supabase = await createClient();
     const {
       data: { user },
@@ -17,8 +26,9 @@ export default async function FeedPage() {
     const {data : username} = await supabase.from('users').select('username').eq('id', user?.id).single();
     
     //console.log(username);
-    const { data: posts } = await supabase.from('posts').select('id, movie, text, created_at, users(username)').order('created_at', { ascending: false });
+    const { data: posts } = await supabase.from('posts').select(`id, movie, text, created_at, user_id, users!inner(username)`).order('created_at', { ascending: false }) as { data: Post[] | null };
     console.log(`posts: ${JSON.stringify(posts)}`);
+    
 
     const formatDate = (isoString: string | number | Date) => {
         const date = new Date(isoString);
@@ -56,9 +66,9 @@ export default async function FeedPage() {
             {posts?.map((post) => (
                 <div key={post.id} className="p-4 flex flex-col gap-2 border rounded-lg w-full bg-accent">
                     <h1 className="flex items-center gap-1 font-medium text-lg"><Clapperboard size={16}/>{post.movie}</h1>
-                    <p className="">{post.text} Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni deleniti perspiciatis soluta alias earum autem laudantium dolores minus! Quisquam, ex.</p>
+                    <p className="">{post.text}</p>
                     <div className="flex mt-2 items-center w-full">
-                        <p className="flex gap-1 items-center text-gray-600 text-sm "><CircleUserRound size={13}/>{post.users.username}</p>
+                        <p className="flex gap-1 items-center text-gray-600 text-sm "><CircleUserRound size={13}/>{post.users?.username || "Unknown User"}</p>
                         <h2 className="flex gap-1 items-center mr-4 text-xs ml-auto text-gray-600 "><Clock size={12} />{formatDate(post.created_at)}</h2>
                     </div>
                 </div>
