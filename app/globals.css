@@ -79,12 +79,5 @@
   * {
     @apply border-border;
   }
-  body {
-    @apply bg-background text-foreground;
-  }
 }
  
-:root {
-  --hero-bg: 
-}
-

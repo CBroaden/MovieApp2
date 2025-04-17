@@ -28,6 +28,13 @@ export default async function FeedPage() {
     //console.log(username);
     const { data: posts } = await supabase.from('posts').select(`id, movie, text, created_at, user_id, users!inner(username)`).order('created_at', { ascending: false }) as { data: Post[] | null };
     
+    if (!posts) {
+        return (
+            <div className="flex-1 flex flex-col items-center gap-6">
+                <h1 className="font-semibold text-xl text-center">No Posts Available</h1>
+            </div>
+        );
+    }
 
     const formatDate = (isoString: string | number | Date) => {
         const date = new Date(isoString);

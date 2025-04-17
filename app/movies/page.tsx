@@ -3,9 +3,17 @@ import SearchBar from "@/components/searchbar"
 import { useMoviesContext } from "@/context/MoviesContext"
 import Image from "next/image"
 import Link from "next/link"
+import Loading from "@/components/loading"
 
 export default function MoviesPage() {
     let movies = useMoviesContext().movies
+
+    if (!movies || movies.length === 0) {
+        return (
+            <Loading />
+        )
+    }
+
     return (
         <div className="flex-1 flex flex-col items-center gap-12">
             <h1 className="font-semibold text-3xl text-center">Movies</h1>

@@ -3,12 +3,17 @@ import React, { useContext, CSSProperties } from "react";
 import Image from 'next/image';
 import { useMoviesContext } from "@/context/MoviesContext";
 import Link from "next/link";
+import Loading from "./loading";
 
 export default function Header() {
   const { movies } = useMoviesContext();
 
   if (!movies || movies.length === 0) {
-    return <div>Loading...</div>;
+    return (
+      /* From Uiverse.io by devAaus */ 
+    <Loading />
+
+  );
   }
 
   return (
