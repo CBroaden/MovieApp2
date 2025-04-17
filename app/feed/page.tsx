@@ -27,7 +27,6 @@ export default async function FeedPage() {
     
     //console.log(username);
     const { data: posts } = await supabase.from('posts').select(`id, movie, text, created_at, user_id, users!inner(username)`).order('created_at', { ascending: false }) as { data: Post[] | null };
-    console.log(`posts: ${JSON.stringify(posts)}`);
     
 
     const formatDate = (isoString: string | number | Date) => {
